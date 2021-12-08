@@ -1,72 +1,31 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+## About Priority task 
+Requirements: 
+●	Use Git for version control, commit each step in a meaningful way. You can use any public git repository or just make a zip archive including git files and send it over email
+●	Back-end should be implemented either with Laravel/Lumen or Symfony
+●	Expected outcome 1: PHP app that can solve the problem below
+●	Expected outcome 2 (completely optional): Create Frontend to accept the 2 parameters for the app, send to the backend, process it and display the results.
+●	You can use any CSS/JS library for this part but handling the main logic with VueJs is a plus
+●	The below tasks are not timed but we recommend not to invest more than 4h on them.
+●	These tasks are not graded. We want to see how you approach problems and get familiar with your coding style. So feel free to submit any amount of work deliverable on the recommended time frame.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Problem statement:
+Create a function which can help users find the best task to work on from the available list (JSON file). The input to the function is ‘hours available at hand now’
+and based on this the function should find the best & shortest task that can be completed in
+the given available hours (consider the priority and due dates as well). 
+For example, after lunch at 1pm, a user will input 4 (hours) so that he/she can find the most critical task that he/she can finish by 5pm. The second input (optional parameter) to the function is ‘hours available tomorrow’ which will help the function to pick a task that he/she can start today but will still be able to complete by tomorrow.
+Prioritisation logic: The priority is given in the order of columns due date, priority. So
+the objective is to finish (due date) as many critical (priority) tasks as possible in the hours
+available the rather just than starting tasks based on priority and leaving them unfinished in
+the absence of time.
+Users can define today’s date. So all tasks due dates will be related to the user defined day. Tasks that past the due dates shouldn’t be considered anymore.
 
-## About Laravel
+JSON file structure:
+"Id": record identifier
+"title": task title
+"status": task status (open, in progress or completed)
+“due_date": linux timestamp
+“priority": 1 as the highest priority to 5 as the lowest
+"estimate": integer value representing the amount of hours required to complete
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Steps to run project 
+php artisan serve
