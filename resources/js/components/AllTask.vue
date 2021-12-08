@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="text-center">All Posts</h3><br/>
+        <h3 class="text-center">All task listing</h3><br/>
             <div style="display: flex;">
                 <form @submit.prevent="fetchPrioritiesTask">
                     
