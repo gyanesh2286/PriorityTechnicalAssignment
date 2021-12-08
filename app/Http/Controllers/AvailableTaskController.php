@@ -45,10 +45,10 @@ class AvailableTaskController extends Controller
         $intHours                   = ($intHours>8)?8:$intHours;
         foreach($arrJsonRecords as $key=>$value){
             
-            if($value['estimate']<$intHours && $value['status']!="Done"){
+            if($value['estimate']<=$intHours && $value['status']!="Done"){
                 $arrTaskCanComplete[]=$value;
                 $intHours        = $intHours-$value['estimate'];
-            }else if($value['estimate']<$intInputHours && $value['status']!="Done"){
+            }else if($value['estimate']<=$intInputHours && $value['status']!="Done"){
                 $arrTaskWouldBeInProgress[]=$value;
                 $intInputHours        = $intInputHours-$value['estimate'];
             }
