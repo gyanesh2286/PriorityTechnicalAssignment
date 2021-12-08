@@ -15,33 +15,7 @@ class AvailableTaskController extends Controller
     {
         $strJsonRecords     = file_get_contents(public_path().'/todo.json');
         $arrJsonRecords     = json_decode($strJsonRecords, true);
-        $intInputHours      = $intHours   = 9;
-        $arrTaskWouldBeInProgress      = [];
-        $arrTaskCanComplete = [];
-        foreach($arrJsonRecords as $key=>$value){
-            if($value['estimate']<$intInputHours && $value['status']!="Done"){
-                $arrTaskWouldBeInProgress[]=$value;
-            }
-            if($value['estimate']<$intHours && $value['status']!="Done"){
-                $arrTaskCanComplete[]=$value;
-            }
-           $intHours        = $intHours-$value['estimate'];
-        }
-        uasort($arrTaskCanComplete, function($arrFirst, $arrSecond) {
-            return $arrFirst['priority'] - $arrSecond['priority'];
-        });
-        uasort($arrTaskCanComplete, function($arrFirst, $arrSecond) {
-            return $arrFirst['due_date'] - $arrSecond['due_date'];
-        });
-        uasort($arrTaskWouldBeInProgress, function($arrFirst, $arrSecond) {
-            return $arrFirst['priority'] - $arrSecond['priority'];
-        });
-        uasort($arrTaskWouldBeInProgress, function($arrFirst, $arrSecond) {
-            return $arrFirst['due_date'] - $arrSecond['due_date'];
-        });
-      
-        dd($arrTaskCanComplete);
-       
+        return response()->json(['status'=>'success','data'=>$arrJsonRecords],200);
     }
 
     /**
@@ -64,17 +38,20 @@ class AvailableTaskController extends Controller
     {
         $strJsonRecords     = file_get_contents(public_path().'/todo.json');
         $arrJsonRecords     = json_decode($strJsonRecords, true);
-        $intInputHours      = $intHours   = 9;
+        $intInputHours      = $intHours   = $request->inputRemainingHours;
         $arrTaskWouldBeInProgress      = [];
         $arrTaskCanComplete = [];
+        $intInputHours=$intInputHours+8;
         foreach($arrJsonRecords as $key=>$value){
-            if($value['estimate']<$intInputHours && $value['status']!="Done"){
-                $arrTaskWouldBeInProgress[]=$value;
-            }
+            
             if($value['estimate']<$intHours && $value['status']!="Done"){
                 $arrTaskCanComplete[]=$value;
+                $intHours        = $intHours-$value['estimate'];
+            }else if($value['estimate']<$intInputHours && $value['status']!="Done"){
+                $arrTaskWouldBeInProgress[]=$value;
+                $intInputHours        = $intInputHours-$value['estimate'];
             }
-           $intHours        = $intHours-$value['estimate'];
+           
         }
         uasort($arrTaskCanComplete, function($arrFirst, $arrSecond) {
             return $arrFirst['priority'] - $arrSecond['priority'];
@@ -88,8 +65,9 @@ class AvailableTaskController extends Controller
         uasort($arrTaskWouldBeInProgress, function($arrFirst, $arrSecond) {
             return $arrFirst['due_date'] - $arrSecond['due_date'];
         });
-      
-        dd($arrTaskCanComplete);
+        
+        return response()->json(['status'=>'success','arrTaskCanComplete'=>$arrTaskCanComplete,'arrTaskWouldBeInProgress'=>$arrTaskWouldBeInProgress],200);
+       
        
     }
 
