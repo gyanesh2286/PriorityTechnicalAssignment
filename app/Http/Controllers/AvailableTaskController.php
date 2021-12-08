@@ -36,12 +36,13 @@ class AvailableTaskController extends Controller
      */
     public function store(Request $request)
     {
-        $strJsonRecords     = file_get_contents(public_path().'/todo.json');
-        $arrJsonRecords     = json_decode($strJsonRecords, true);
-        $intInputHours      = $intHours   = $request->inputRemainingHours;
-        $arrTaskWouldBeInProgress      = [];
-        $arrTaskCanComplete = [];
-        $intInputHours=$intInputHours+8;
+        $strJsonRecords             = file_get_contents(public_path().'/todo.json');
+        $arrJsonRecords             = json_decode($strJsonRecords, true);
+        $intInputHours              = $intHours   = $request->inputRemainingHours;
+        $arrTaskWouldBeInProgress   = [];
+        $arrTaskCanComplete         = [];
+        $intInputHours              = $intInputHours+8;
+        $intHours                   = ($intHours>8)?8:$intHours;
         foreach($arrJsonRecords as $key=>$value){
             
             if($value['estimate']<$intHours && $value['status']!="Done"){
@@ -53,6 +54,7 @@ class AvailableTaskController extends Controller
             }
            
         }
+       
         uasort($arrTaskCanComplete, function($arrFirst, $arrSecond) {
             return $arrFirst['priority'] - $arrSecond['priority'];
         });

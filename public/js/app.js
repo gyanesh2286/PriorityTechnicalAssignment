@@ -37646,7 +37646,7 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h3", { staticClass: "text-center" }, [_vm._v("All Posts")]),
+    _c("h3", { staticClass: "text-center" }, [_vm._v("All task listing")]),
     _c("br"),
     _vm._v(" "),
     _c("div", { staticStyle: { display: "flex" } }, [
@@ -37858,7 +37858,7 @@ var staticRenderFns = [
       },
       [
         _c("span", { staticClass: "text-secondary" }, [
-          _vm._v("Laravel Vue CRUD Example"),
+          _vm._v("Laravel Vue priority task listing"),
         ]),
       ]
     )
